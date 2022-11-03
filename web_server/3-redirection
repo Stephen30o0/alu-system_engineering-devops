@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Configures NGINX
-sudo apt-get update -y
-sudo apt-get install nginx -y
-echo "Holberton School" > /var/www/html/index.nginx-debian.html
-new_string="server_name _;\n\trewrite ^\/redirect_me google.com permanent;"
-sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-enabled/default
-service nginx start
+#setting up nginx server
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
+sudo sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://hamiltonmusical.fandom.com/wiki/Hamilton_Wiki;" /etc/nginx/sites-enabled/default
+sudo service nginx restart
