@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-#setting up nginx server
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
-sudo sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://hamiltonmusical.fandom.com/wiki/Hamilton_Wiki;" /etc/nginx/sites-enabled/default
-sudo service nginx restart
+# redirect to another page and stuff
+apt-get -y install nginx
+echo "Holberton School for the win!" | tee /usr/share/nginx/html/index.html > /dev/null
+service nginx restart
+
+sed -i "s|location / {|location /redirect_me {|g"  /etc/nginx/sites-available/default
+sed -i "s|try_files \$uri \$uri/ =404;|return 301 https://www.youtube.com/watch?v=vkgCnoUDyts;|g" /etc/nginx/sites-available/default
+service nginx restart
