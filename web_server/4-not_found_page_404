@@ -3,11 +3,11 @@
 apt-get update
 apt-get -y install nginx
 echo "Holberton School" | tee /usr/share/nginx/html/index.html > /dev/null
-service nginx restart
+sudo service nginx restart
 
 sed -i "s|location / {|location /redirect_me {|g"  /etc/nginx/sites-available/default
 sed -i "s|try_files \$uri \$uri/ =404;|return 301 https://www.youtube.com/watch?v=vkgCnoUDyts;|g" /etc/nginx/sites-available/default
-service nginx restart
+sudo service nginx restart
 
 NEW_STRING="\\\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
 
