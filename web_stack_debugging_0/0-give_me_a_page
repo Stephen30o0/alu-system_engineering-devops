@@ -3,7 +3,7 @@
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install apache2
-sudo service apache2 start
-sudo service apache2 status
+service apache2 start
+service apache2 status
 echo "Hello Holberton" | sudo tee /var/www/html/index.html
-sudo service apache2 restart
+service apache2 restart
